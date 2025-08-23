@@ -15,7 +15,7 @@ DATABASE_URL = os.getenv(
     "postgresql+psycopg2://usuario:senha@localhost:5432/minhalivraria"
 )
 
-# cria o engine SQLAlchemy (síncrono)
+
 engine = create_engine(
     DATABASE_URL,
     echo=True,
@@ -23,11 +23,8 @@ engine = create_engine(
 )
 
 
-# session factory e base declarativa para os models
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-
-# dependency para FastAPI — use Depends(get_db) nas rotas
 
 
 def get_db():
