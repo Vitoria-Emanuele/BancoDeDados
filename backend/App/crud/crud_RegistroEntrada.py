@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sregistroentrada
 
 # Criar registro de entrada
 
 
-def criar_RegistroEntrada(db: Session, RegistroEntrada: schemas.RegistroEntradaCreate):
+def criar_RegistroEntrada(db: Session, RegistroEntrada: sregistroentrada.RegistroEntradaCreate):
     db_RegistroEntrada = models.RegistroEntrada(**RegistroEntrada.dict())
     db.add(db_RegistroEntrada)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_RegistroEntrada(db: Session, RegistroEntrada_id: int):
 # Atualizar
 
 
-def atualizar_RegistroEntrada(db: Session, RegistroEntrada_id: int, RegistroEntrada_update: schemas.RegistroEntradaUpdate):
+def atualizar_RegistroEntrada(db: Session, RegistroEntrada_id: int, RegistroEntrada_update: sregistroentrada.RegistroEntradaUpdate):
     db_RegistroEntrada = buscar_RegistroEntrada(db, RegistroEntrada_id)
     if not db_RegistroEntrada:
         return None

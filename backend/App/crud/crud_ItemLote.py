@@ -1,48 +1,49 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sitemlote
 
-# Criar ItensLote
+# Criar ItemLote
 
 
-def criar_ItensLote(db: Session, ItensLote: schemas.ItensLoteCreate):
-    db_ItensLote = models.ItensLote(**ItensLote.dict())
-    db.add(db_ItensLote)
+def criar_ItemLote(db: Session, ItemLote: sitemlote.ItemLoteCreate):
+    db_ItemLote = models.ItemLote(**ItemLote.dict())
+    db.add(db_ItemLote)
     db.commit()
-    db.refresh(db_ItensLote)
-    return db_ItensLote
+    db.refresh(db_ItemLote)
+    return db_ItemLote
 
 # Listar todos
 
 
-def listar_ItensLote(db: Session):
-    return db.query(models.ItensLote).all()
+def listar_ItemLote(db: Session):
+    return db.query(models.ItemLote).all()
 
 # Buscar por ID
 
 
-def buscar_ItensLote(db: Session, ItensLote_id: int):
-    return db.query(models.ItensLote).filter(models.ItensLote.id_ItensLote == ItensLote_id).first()
+def buscar_ItemLote(db: Session, ItemLote_id: int):
+    return db.query(models.ItemLote).filter(models.ItemLote.id_ItemLote == ItemLote_id).first()
 
 # Atualizar
 
 
-def atualizar_ItensLote(db: Session, ItensLote_id: int, ItensLote_update: schemas.ItensLoteUpdate):
-    db_ItensLote = buscar_ItensLote(db, ItensLote_id)
-    if not db_ItensLote:
+def atualizar_ItemLote(db: Session, ItemLote_id: int, ItemLote_update: sitemlote.ItemLoteUpdate):
+    db_ItemLote = buscar_ItemLote(db, ItemLote_id)
+    if not db_ItemLote:
         return None
-    for key, value in ItensLote_update.dict(exclude_unset=True).items():
-        setattr(db_ItensLote, key, value)
+    for key, value in ItemLote_update.dict(exclude_unset=True).items():
+        setattr(db_ItemLote, key, value)
     db.commit()
-    db.refresh(db_ItensLote)
-    return db_ItensLote
+    db.refresh(db_ItemLote)
+    return db_ItemLote
 
 # Remover
 
 
-def remover_ItensLote(db: Session, ItensLote_id: int):
-    db_ItensLote = buscar_ItensLote(db, ItensLote_id)
-    if db_ItensLote:
-        db.delete(db_ItensLote)
+def remover_ItemLote(db: Session, ItemLote_id: int):
+    db_ItemLote = buscar_ItemLote(db, ItemLote_id)
+    if db_ItemLote:
+        db.delete(db_ItemLote)
         db.commit()
         return True
     return False

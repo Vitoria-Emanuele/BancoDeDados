@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sfuncionario
 
 # Criar funcionário
 
 
-def criar_funcionario(db: Session, funcionario: schemas.FuncionarioCreate):
+def criar_funcionario(db: Session, funcionario: sfuncionario.FuncionarioCreate):
     db_funcionario = models.Funcionario(**funcionario.dict())
     db.add(db_funcionario)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_funcionario(db: Session, funcionario_id: int):
 # Atualizar
 
 
-def atualizar_funcionario(db: Session, funcionario_id: int, funcionario_update: schemas.FuncionarioUpdate):
+def atualizar_funcionario(db: Session, funcionario_id: int, funcionario_update: sfuncionario.FuncionarioUpdate):
     db_funcionario = buscar_funcionario(db, funcionario_id)
     if not db_funcionario:
         return None

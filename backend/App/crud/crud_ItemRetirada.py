@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sitemretirada
 
 # Criar ItemRetirada
 
 
-def criar_ItemRetirada(db: Session, ItemRetirada: schemas.ItemRetiradaCreate):
+def criar_ItemRetirada(db: Session, ItemRetirada: sitemretirada.ItemRetiradaCreate):
     db_ItemRetirada = models.ItemRetirada(**ItemRetirada.dict())
     db.add(db_ItemRetirada)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_ItemRetirada(db: Session, ItemRetirada_id: int):
 # Atualizar
 
 
-def atualizar_ItemRetirada(db: Session, ItemRetirada_id: int, ItemRetirada_update: schemas.ItemRetiradaUpdate):
+def atualizar_ItemRetirada(db: Session, ItemRetirada_id: int, ItemRetirada_update: sitemretirada.ItemRetiradaUpdate):
     db_ItemRetirada = buscar_ItemRetirada(db, ItemRetirada_id)
     if not db_ItemRetirada:
         return None

@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sretirada
 
 # Criar Retirada
 
 
-def criar_retirada(db: Session, retirada: schemas.RetiradaCreate):
+def criar_retirada(db: Session, retirada: sretirada.RetiradaCreate):
     db_retirada = models.Retirada(**retirada.dict())
     db.add(db_retirada)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_retirada(db: Session, retirada_id: int):
 # Atualizar
 
 
-def atualizar_retirada(db: Session, retirada_id: int, retirada_update: schemas.RetiradaUpdate):
+def atualizar_retirada(db: Session, retirada_id: int, retirada_update: sretirada.RetiradaUpdate):
     db_retirada = buscar_retirada(db, retirada_id)
     if not db_retirada:
         return None

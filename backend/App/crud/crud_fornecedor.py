@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import sfornecedor
 
 # Criar fornecedor
 
 
-def criar_fornecedor(db: Session, fornecedor: schemas.FornecedorCreate):
+def criar_fornecedor(db: Session, fornecedor: sfornecedor.FornecedorCreate):
     db_fornecedor = models.Fornecedor(**fornecedor.dict())
     db.add(db_fornecedor)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_fornecedor(db: Session, fornecedor_id: int):
 # Atualizar
 
 
-def atualizar_fornecedor(db: Session, fornecedor_id: int, fornecedor_update: schemas.FornecedorUpdate):
+def atualizar_fornecedor(db: Session, fornecedor_id: int, fornecedor_update: sfornecedor.FornecedorUpdate):
     db_fornecedor = buscar_fornecedor(db, fornecedor_id)
     if not db_fornecedor:
         return None

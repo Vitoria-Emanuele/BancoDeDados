@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import slivro
 
 # Criar livro
 
 
-def criar_livro(db: Session, livro: schemas.LivroCreate):
+def criar_livro(db: Session, livro: slivro.LivroCreate):
     db_livro = models.Livro(**livro.dict())
     db.add(db_livro)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_livro(db: Session, livro_id: int):
 # Atualizar
 
 
-def atualizar_livro(db: Session, livro_id: int, livro_update: schemas.LivroUpdate):
+def atualizar_livro(db: Session, livro_id: int, livro_update: slivro.LivroUpdate):
     db_livro = buscar_livro(db, livro_id)
     if not db_livro:
         return None

@@ -1,10 +1,11 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from .. import models
+from ..schemas import slote
 
 # Criar lote
 
 
-def criar_lote(db: Session, lote: schemas.LoteCreate):
+def criar_lote(db: Session, lote: slote.LoteCreate):
     db_lote = models.Lote(**lote.dict())
     db.add(db_lote)
     db.commit()
@@ -26,7 +27,7 @@ def buscar_lote(db: Session, lote_id: int):
 # Atualizar
 
 
-def atualizar_lote(db: Session, lote_id: int, lote_update: schemas.LoteUpdate):
+def atualizar_lote(db: Session, lote_id: int, lote_update: slote.LoteUpdate):
     db_lote = buscar_lote(db, lote_id)
     if not db_lote:
         return None
